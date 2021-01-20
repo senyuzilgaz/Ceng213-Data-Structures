@@ -1,4 +1,5 @@
-The project's whole aim is written in TermProject.pdf file, 
-but in a nutshell, It reads 22 reuter files of 1000 documents each 
-and prints the 10 most frequents word excluding the words in stopwords.txt .
-Hashtable data structure is implemented for storing every word and values in it.
+THE PROJECT'S WHOLE AIM IS WRITTEN IN TERMPROJECT.PDF FILE.
+IN A NUTSHELL, IT READS 22 REUTER FILES OF 1000 DOCUMENTS EACH 
+AND PRINTS THE 10 MOST FREQUENT WORDS EXCLUDİNG THE WORDS IN 
+STOPWORDS.TXT . HASHTABLE DATA STRUCTURE IS IMPLEMENTED TO STORE 
+EVERY WORD AND THEIR VALUES (HOW MANY TIMES THEY ARE USED) .
