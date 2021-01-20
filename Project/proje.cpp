@@ -1,76 +1,12 @@
-﻿#include "HashTable.h"
+#include "HashTable.h"
 #include "HashUtils.h"
 #include "HashUtils.cpp"
 #include "Word.h"
+#include "Utils.h"
 #include <iostream>
 #include <fstream>
 #include <chrono>
 using namespace std;
-
-// Sorts the most frequent words list in ascending order
-void insertionSort(Word arr[])
-{
-    int i, j;
-    Word key;
-    for (i = 1; i < 10; i++)
-    {
-        key = arr[i];
-        j = i - 1;
-        while (j >= 0 && arr[j].getValue() > key.getValue() )
-        {
-            arr[j + 1] = arr[j];
-            j = j - 1;
-        }
-        arr[j + 1] = key;
-    }
-}
-//Check if the word is in the stopwords list
-bool isStopWord(string arr[], string word)
-{
-    for (int i = 0; i < 571; ++i)
-    {
-        if (arr[i] == word)
-            return true;
-    }
-    return false;
-}
-
-//It converts string's all letters to lowercase while skipping punctuation marks and numbers.
-string toLower( string str)
-{
-    string last;
-    for (unsigned int i = 0; i < str.size(); ++i) {
-
-        
-        if (str[i] >= 'A' && str[i] <= 'Z') {
-            last += (str[i] + ('a' - 'A'));
-            continue;
-        }
-            
-
-        else if (str[i] >= 'a' && str[i] <= 'z') {
-            last += str[i];
-            continue;
-        }
-            
-        else if (str[i] == '\'') {
-            last += str[i];
-            continue;
-        }
-            
-        
-    }
-    return last;
-}
-//Since the first word may be adjoined with "<Body>" it takes first word without "<Body>" part
-string First(string str, int i)
-{
-    string last;
-    for (int j = i+6; str[j]; ++j) {
-        last += str[j];
-    }
-    return last;
-}
 
 int main()
 {
@@ -84,8 +20,8 @@ int main()
                             "reut2-020.sgm", "reut2-021.sgm" };
     Word most[10];
 
-    // Flag is for reading only body part. It becomes true when it sees <Body>, false when it sees </Body>
-    bool flag = true;
+    
+    bool flag = true;  // Flag is for reading only body part. It becomes true when it sees <Body>, false when it sees </Body>
     ifstream file;
     start = "<BODY>";
     end = "</BODY>";
