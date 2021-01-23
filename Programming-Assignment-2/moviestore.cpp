@@ -25,30 +25,6 @@ MovieStore::insert(const Movie & movie)
 
 
 void
-MovieStore::remove(const std::string & id)
-{
-
-       
-       
-} 
-
-void
-MovieStore::remove(const std::string & title,
-                  const std::string & director)
-{
-    
-}
-
-
-void
-MovieStore::removeAllMoviesWithTitle(const std::string & title)
-{
-    
-
-}
-
-
-void
 MovieStore::makeAvailable(const std::string & id)
 {
     MSTP::Node *current;
