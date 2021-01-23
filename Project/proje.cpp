@@ -5,12 +5,13 @@
 #include "Utils.h"
 #include <iostream>
 #include <fstream>
-#include <chrono>
+#include <ctime>
 using namespace std;
 
 int main()
 {
-    auto t_start = std::chrono::high_resolution_clock::now();
+    clock_t sstart, eend;
+    sstart = clock();
     HashTable<string,long> Table;
     string word, start, end , *keys, stopwords[571];
     string documents[22] = { "reut2-000.sgm" ,"reut2-001.sgm" ,"reut2-002.sgm" ,"reut2-003.sgm" ,"reut2-004.sgm" ,
@@ -39,15 +40,11 @@ int main()
 
         while (file >> word)
         {
+            
 
             if (word.find(start) != string::npos) {
                 flag = false;
                 word = First(word, word.find(start));
-            }
-
-            //Since "U.S." is converted to "us" in toLower function, and "us" is in the stopwords list, we had to insert it manually
-            if (word == "U.S.") {
-                Table.Insert("US", Table.Get("US")+1 );
             }
             else if (word.find(end) != string::npos) {
                 flag = true;
@@ -56,7 +53,11 @@ int main()
             if (flag) {
                 continue;
             }
-            
+
+            //Since "U.S." is converted to "us" in toLower function, and "us" is in the stopwords list, we had to insert it manually
+            if (word == "U.S.") {
+                Table.Insert("US", Table.Get("US") + 1);
+            }           
             word = toLower(word);
 
             //Since toLower function eliminates all punctuation marks and numbers, it may return empty string
@@ -68,13 +69,13 @@ int main()
         file.close();
     }
 
-    keys = new string[Table.Size()];
+    
 
     //Deletes stopwords from the Hashtable
     for (int i = 0; i < 571; ++i) {
         Table.Delete(stopwords[i]);
     }
-
+    keys = new string[Table.Size()];
     Table.getKeys(keys);
     
     //Traverses the Hashtable then inserts most 10 frequents words to MOST list
@@ -102,10 +103,9 @@ int main()
     delete[]keys;
 
     //Printing time spent (milliseconds)
-    auto t_end = std::chrono::high_resolution_clock::now();
-    double elapsed_time_ms = std::chrono::duration<double, std::milli>(t_end - t_start).count();
+    eend = clock();
 
-    cout << "Time spent: "<<elapsed_time_ms<< " milliseconds"<<endl;
+    cout << "Time spent: "<< eend - sstart<< " milliseconds"<<endl;
     return 0;
 
 }
